@@ -50,8 +50,8 @@ class FeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchTweets() {
-        collectionView.refreshControl?.beginRefreshing()
         TweetService.shared.fetchTweets { tweets in
+            self.collectionView.refreshControl?.beginRefreshing()
             self.tweets = tweets.sorted(by: { $0.timestamp > $1.timestamp } )
     
             self.checkIfUserLikedTweet()
