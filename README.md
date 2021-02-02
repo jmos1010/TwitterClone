@@ -1,7 +1,7 @@
 # TwitterClone
 
 This project was started as a way of learning new iOS development concepts.
-It was created by following Udemy course.
+It was created by following a Udemy course.
 
 ## Description
 
