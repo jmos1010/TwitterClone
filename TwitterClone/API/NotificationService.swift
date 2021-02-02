@@ -10,20 +10,21 @@ import Firebase
 struct NotificationService {
     static let shared = NotificationService()
     
-    func uploadNotification(type: NotificationType, tweet: Tweet? = nil, user: User? = nil) {
+    func uploadNotification(toUser user: User,
+                            type: NotificationType,
+                            tweetID: String? = nil) {
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         var values: [String: Any] = ["timestamp" : Int(NSDate().timeIntervalSince1970),
                                      "type" : type.rawValue,
                                      "uid" : uid]
-        
-        
-        if let tweet = tweet {
-            values["tweetID"] = tweet.tweetID
-            REF_NOTIFICATIONS.child(tweet.user.uid).childByAutoId().updateChildValues(values)
-        } else if let user = user {
-            REF_NOTIFICATIONS.child(user.uid).childByAutoId().updateChildValues(values)
+ 
+        if let tweetID = tweetID {
+            values["tweetID"] = tweetID
         }
+        
+        REF_NOTIFICATIONS.child(user.uid).childByAutoId().updateChildValues(values)
     }
     
     func fetchNotifications(completion: @escaping([Notification]) -> Void) {
@@ -40,8 +41,11 @@ struct NotificationService {
             }
         }
         
-        
-        
+        // if there are no notifications just pass empty array to finish refresh in NotificationsController
+        if notifications.count == 0 {
+            completion(notifications)
+        }
+    
     }
     
 }

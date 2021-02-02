@@ -91,6 +91,8 @@ extension NotificationsController {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension NotificationsController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let tweetID = notifications[indexPath.row].tweetID else { return }
@@ -107,7 +109,6 @@ extension NotificationsController: NotificationCellDelegate {
     func didTapFollow(_ cell: NotificationCell) {
 
         guard let user = cell.notification?.user else { return }
-        print("DEBUG: User is followed \(user.isFollowed)")
         
         if user.isFollowed {
             UserService.shared.unfollowUser(uid: user.uid) { (err, ref) in
