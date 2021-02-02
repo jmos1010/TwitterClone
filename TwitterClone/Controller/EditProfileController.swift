@@ -9,6 +9,7 @@ import UIKit
 
 protocol EditProfileControllerDelegate: class {
     func controller(_ controller: EditProfileController, wantsToUpdate user: User)
+    func handleLogut()
 }
 
 class EditProfileController: UITableViewController {
@@ -168,7 +169,19 @@ extension EditProfileController: EditProfileHeaderDelegate {
 
 extension EditProfileController: EditProfileFooterDelegate {
     func didTapLogout() {
-        print("DEBUG: Did tap logout..")
+        
+        let alert = UIAlertController(title: nil, message: "Are you sure you want to log out?", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { _ in
+            self.dismiss(animated: true) {
+                self.delegate?.handleLogut()
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
+        
     }
 }
 
