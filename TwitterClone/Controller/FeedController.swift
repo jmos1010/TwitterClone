@@ -8,8 +8,6 @@
 import UIKit
 import SDWebImage
 
-private let reuseIdentifier = "TweetCell"
-
 class FeedController: UICollectionViewController {
     
     // MARK: - Properties
@@ -80,7 +78,7 @@ class FeedController: UICollectionViewController {
     func configureUI() {
         view.backgroundColor = .white
         
-        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.register(TweetCell.self, forCellWithReuseIdentifier: "\(TweetCell.self)")
         collectionView.backgroundColor = .white
         
         let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
@@ -118,7 +116,7 @@ extension FeedController {
         return tweets.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(TweetCell.self)", for: indexPath) as! TweetCell
         cell.delegate = self
         
         cell.tweet = tweets[indexPath.row]

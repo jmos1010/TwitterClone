@@ -7,11 +7,16 @@
 
 import UIKit
 
-private let reuseIdentifier = "UserCell"
+enum ExploreControllerConfiguration {
+    case userSearch
+    case messages
+}
 
 class ExploreController: UITableViewController {
     
     // MARK: - Properties
+    
+    private let config: ExploreControllerConfiguration
     
     private var users = [User]() {
         didSet { tableView.reloadData() }
@@ -28,6 +33,15 @@ class ExploreController: UITableViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
+    
+    init(config: ExploreControllerConfiguration) {
+        self.config = config
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,15 +64,25 @@ class ExploreController: UITableViewController {
         }
     }
     
+    // MARK: - Selectors
+    
+    @objc func handleDismissal() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Helpers
     
     func configureUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Explore"
+        navigationItem.title = config == .messages ? "New message" : "Explore"
         
-        tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(UserCell.self, forCellReuseIdentifier: "\(UserCell.self)")
         tableView.rowHeight = 60
         tableView.separatorStyle = .none
+        
+        if config == .messages {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleDismissal))
+        }
     }
     
     func configureSearchController() {
@@ -80,7 +104,7 @@ extension ExploreController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! UserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "\(UserCell.self)", for: indexPath) as! UserCell
         let user = inSearchMode ? filteredUsers[indexPath.row] : users[indexPath.row]
         cell.user = user
         return cell
