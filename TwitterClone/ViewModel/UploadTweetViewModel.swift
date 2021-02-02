@@ -14,11 +14,15 @@ enum UploadTweetConfiguration {
 
 struct UploadTweetViewModel {
     
+    // MARK: - Properties
+    
     let actionButtonTitle: String
     let placeholderText: String
     var shouldShowReplyLabel: Bool
     var replyText: String?
     
+    // MARK: - Lifecycle
+
     init(config: UploadTweetConfiguration) {
         switch config {
         case .tweet:

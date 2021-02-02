@@ -30,7 +30,6 @@ class ProfileController: UICollectionViewController {
         }
     }
     
-    
     // MARK: - Lifecycle
     
     init(user: User) {

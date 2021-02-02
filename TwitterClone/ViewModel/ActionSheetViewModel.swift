@@ -33,10 +33,9 @@ struct ActionSheetViewModel {
     init(user: User) {
         self.user = user
     }
-    
-    // MARK: - Helpers
-    
 }
+
+// MARK: - ActionSheetOptions
 
 enum ActionSheetOptions {
     case follow(User)

@@ -148,7 +148,7 @@ class UploadTweetController: UIViewController {
     
     func configureMentionHandler() {
         replyLabel.handleMentionTap { mention in
-            print("DEBUG: Mentioned user is \(mention)")
+            print("DEBUG: Reply label, mentioned user is \(mention)")
         }
     }
 }
