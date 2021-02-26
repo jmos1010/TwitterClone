@@ -40,8 +40,5 @@ You can:
 <img src="https://user-images.githubusercontent.com/71961749/106662572-d6560100-65a2-11eb-89eb-5d44ab66bdc1.png" width="250"> <img src="https://user-images.githubusercontent.com/71961749/106662712-07363600-65a3-11eb-886f-5d2c82ded258.png" width="250"> <img src="https://user-images.githubusercontent.com/71961749/106662719-09989000-65a3-11eb-9221-9be8c588e747.png" width="250">
 
 ### ToDo
-- [ ] fix bugs
-- [ ] implement side menu with user settings and logout button
 - [ ] implement custom messaging
-- [ ] continue learning new things...
-
+- [ ] implement side menu with user settings and logout button
